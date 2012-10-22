@@ -1,5 +1,5 @@
 Ext.application({
-		name: 'Sample.ExtJs.Play.HelloWorld',
+		name: 'Sample.ExtJs.Play.Mvc.SimpleCrud',
 		launch: function() {
 			Ext.create('Ext.container.Viewport', {
 					layout: 'border',
