@@ -13,16 +13,44 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.controller.EmployeeController',{
         'EmployeeGridView'
     ],
 
+    stores: [ 'Employees' ],
+    models: [ 'Employee' ],
+
+    refs: [{
+        ref: 'entryForm',
+        selector: 'employeeEntryForm'
+    }],
+
     init: function(){
         console.info('Employee Controller is initialised.');
         this.control({
-            'viewport > panel': {
-                render: this.onPanelRendered
+            'employeeEntryForm button[action=save]': {
+                click: this.onSave
+            },
+            'employeeEntryForm button[action=clear]':{
+                click: this.onClear
+            },
+            'employeeGridForm':{
+                itemclick: this.onRecordSelected
             }
         });
     },
 
-    onPanelRendered: function(){
-        console.info('Employee Controller\'s panel has been rendered');
+    onSave: function(){
+        console.info('Button Save has been clicked from within the controller');
+        // TODO:
+        //  1. Get Record
+        //  2. Find if the proposed record exist, if yes, add it into Store. Otherwise, update the existing one.
+//        var recordToSave = this.getEntryForm().getForm().getRecord();
+//        console.info('Record to save='+recordToSave);
+    },
+
+    onClear: function(){
+        console.info('Button Clear has been clicked from within the controller');
+        this.getEntryForm().setCurrentRecord(null);
+    },
+
+    onRecordSelected: function(grid, record){
+        console.info('selected record ='+record);
     }
 });

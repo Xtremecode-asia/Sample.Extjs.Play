@@ -13,22 +13,24 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 	requires: [
 		'Ext.grid.plugin.CellEditing',
 		'Ext.form.field.Text',
-		'Ext.toolbar.TextItem'
+		'Ext.toolbar.TextItem',
+		'Sample.Extjs.Play.Mvc.SimpleCrud.store.Employees'
 	],
+
+    store: 'Employees',
 
 //	iconCls: 'icon-grid',
 	frame: true,
 	dockedItems:[{
 		xtype: 'toolbar',
-		items: [{
+		items: [/*{
 			//iconCls: 'icon-add',
 			text: 'Add',
 			scope: this
 
-		}, {
+		},*/ {
 			//iconCls: 'icon-delete',
 			text: 'Delete',
-			disabled: true,
 			itemId: 'delete',
 			scope: this
 
@@ -66,6 +68,15 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 	}],
 
     columns:[{
+        header: 'ID',
+        width: 40,
+        sortable: true,
+        dataIndex: 'id',
+        field: {
+            type: 'textField'
+        }
+
+    },{
         header: 'Code',
         width: 100,
         sortable: true,
@@ -77,7 +88,7 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
         header: 'First Name',
         width: 200,
         sortable: true,
-        dataIndex: 'first',
+        dataIndex: 'firstName',
         field: {
             type: 'textField'
         }
@@ -85,7 +96,7 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
         header: 'Last Name',
         width: 200,
         sortable: true,
-        dataIndex: 'last',
+        dataIndex: 'lastName',
         field: {
             type: 'textField'
         }
@@ -114,12 +125,10 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
     }],
 
 	initComponent: function(){
-		this.editing = Ext.create('Ext.grid.plugin.CellEditing');
-        console.info(this.editing);
-        this.plugins = [this.editing];
-        console.info(this.plugins);
+//		this.editing = Ext.create('Ext.grid.plugin.CellEditing');
+//        this.plugins = [this.editing];
 		this.callParent();
         //this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
-        console.info('Employee Grid view has been initialised.');
 	}
+
 });
