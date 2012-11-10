@@ -11,7 +11,6 @@ Ext.application({
         launch: onApplicationLaunched,
 
         controllers: ['EmployeeController']
-        //requires:['view.MainView']
     }
 );
 
