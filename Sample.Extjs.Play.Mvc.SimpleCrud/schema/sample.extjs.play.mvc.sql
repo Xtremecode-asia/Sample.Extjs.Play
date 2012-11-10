@@ -34,7 +34,7 @@ CREATE TABLE `employee` (
   `email` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'776677','Johny','Rotten','21th Mango Street','5558675309','johny.rotten@nineheaven.com'),(2,'442356','Courtney','Love','45th Guava Street','5557824567','courtney.love@nirvana.com');
+INSERT INTO `employee` VALUES (1,'776677','Johny','Walker','21th Mango Street','5558675309','johny.rotten@nineheaven.com'),(2,'442356','Courtney','Love','45th Guava Street','5557824567','courtney.love@nirvana.com'),(9,'987456123','Celia','Christiani','53th Pear Street','62123321123','celia.christiani@test.com'),(10,'951159951','Gisella','Anastasia','50th Mango street','62753357753','gisella.anastasia@test.com'),(11,'9877753126','Jon','Snow','57th Stark\'s House','629636963','jon.snow@test.com'),(12,'456951753','Veronica','Rayne','61th Papaya Street','628178978989','veronica.rayne@test.com');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-30  1:25:06
+-- Dump completed on 2012-11-10 19:51:17

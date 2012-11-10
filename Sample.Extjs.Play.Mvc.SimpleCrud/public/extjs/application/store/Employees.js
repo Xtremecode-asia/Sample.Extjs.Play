@@ -18,6 +18,14 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.store.Employees',{
     },
 
     reader: {
+        type: 'json',
+        idProperty: 'id',
+        successProperty: 'IsSuccess',
+        messageProperty: 'Error',
+        totalProperty: 'count'
+    },
+
+    writer: {
         type: 'json'
     }
 });

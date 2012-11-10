@@ -19,6 +19,9 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.controller.EmployeeController',{
     refs: [{
         ref: 'entryForm',
         selector: 'employeeEntryForm'
+    }, {
+        ref: 'gridView',
+        selector: 'employeeGridForm'
     }],
 
     init: function(){
@@ -31,26 +34,75 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.controller.EmployeeController',{
                 click: this.onClear
             },
             'employeeGridForm':{
-                itemclick: this.onRecordSelected
+                selectionchange: this.onSelectionChange
+            },
+            'employeeGridForm button[action=delete]':{
+                click: this.onDelete
+            },
+            'employeeGridForm button[action=sync]':{
+                click: this.onSync
             }
         });
     },
 
     onSave: function(){
-        console.info('Button Save has been clicked from within the controller');
-        // TODO:
         //  1. Get Record
-        //  2. Find if the proposed record exist, if yes, add it into Store. Otherwise, update the existing one.
-//        var recordToSave = this.getEntryForm().getForm().getRecord();
-//        console.info('Record to save='+recordToSave);
+        var targetRecord = this.getEntryForm().getRecord();
+        var values = this.getEntryForm().getValues();
+        if (targetRecord == null){
+            // Does the user has entered valid values on the form ?
+            if (this.getEntryForm().getForm().hasInvalidField()){
+                Ext.Msg.alert('Error', 'Some fields in the form contain invalid value.');
+                this.getEntryForm().focus();
+                return;
+            }
+
+            //  User tries to create a new record. Check for duplicated code 1st.
+            if (this.getEmployeesStore().find('code', values.code) <0){
+                // Create a new record and push it into store
+                var newEmployee = new Sample.Extjs.Play.Mvc.SimpleCrud.model.Employee(
+                    {
+                        firstName : values.firstName,
+                        lastName : values.lastName,
+                        code : values.code,
+                        address : values.address,
+                        phone : values.phone,
+                        email : values.email
+                    }
+                );
+                this.getEmployeesStore().add(newEmployee);
+            }
+            else{
+                //TODO: Display Error ? or Confirmation to update an existing with entered values?
+            }
+        }
+        else{
+            // Update the record
+            targetRecord.set(values);
+        }
+        // TODO:
+        //  2. Push the dirty records to server.
     },
 
     onClear: function(){
-        console.info('Button Clear has been clicked from within the controller');
+        this.getGridView().getSelectionModel().deselectAll();
         this.getEntryForm().setCurrentRecord(null);
     },
 
-    onRecordSelected: function(grid, record){
-        console.info('selected record ='+record);
+    onSelectionChange: function(grid, selected, eOpts){
+        this.getEntryForm().setCurrentRecord(selected[0]);
+    },
+
+    onDelete: function(button){
+        var targetRecord = this.getEntryForm().getRecord();
+        if (targetRecord != null){
+            //Remove the selected record
+            this.getEmployeesStore().remove(targetRecord);
+            this.getEntryForm().setCurrentRecord(null);
+        }
+    },
+
+    onSync: function(button){
+        this.getEmployeesStore().sync();
     }
 });

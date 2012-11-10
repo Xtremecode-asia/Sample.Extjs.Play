@@ -31,7 +31,8 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 		},*/ {
 			//iconCls: 'icon-delete',
 			text: 'Delete',
-			itemId: 'delete',
+			itemId: 'buttonDelete',
+			action: 'delete',
 			scope: this
 
 		}]
@@ -48,13 +49,13 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
             pressed: true,
             tooltip: 'When enabled, Store will execute Ajax requests as soon as a Record becomes dirty.',
             scope: this
-		},	{
+		}/*,	{
 			text: 'batch',
             enableToggle: true,
             pressed: true,
             tooltip: 'When enabled, Store will batch all records for each type of CRUD verb into a single Ajax request.',
             scope: this
-		}]
+		}*/]
 	}, {
 		weight: 1,
 		xtype: 'toolbar',
@@ -63,6 +64,8 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 		items: [{
 			//iconCls: 'icon-save',
             text: 'Sync',
+            itemId: 'buttonSync',
+            action: 'sync',
             scope: this
 		}]
 	}],
@@ -128,6 +131,7 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 //		this.editing = Ext.create('Ext.grid.plugin.CellEditing');
 //        this.plugins = [this.editing];
 		this.callParent();
+		this.getSelectionModel().allowDeselect = true;
         //this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
 	}
 

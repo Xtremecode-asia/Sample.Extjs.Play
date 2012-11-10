@@ -76,6 +76,7 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeEntryView',{
     setCurrentRecord: function(record){
         if (record == null){
             this.getForm().reset();
+            this.getForm()._record = null;
         }
         else{
             this.getForm().loadRecord(record);

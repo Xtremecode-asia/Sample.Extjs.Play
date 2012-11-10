@@ -1,46 +1,33 @@
 package controllers.rest;
 
 import actors.MasterDataService;
-import actors.messages.GetEmployeesResponse;
-import akka.dispatch.Mapper;
 import org.codehaus.jackson.JsonNode;
-import play.libs.Akka;
-import play.mvc.Controller;
+import play.mvc.BodyParser;
 import play.mvc.Result;
+import repositories.EmployeeRepository;
 
 /**
  * Created by Wendy Sanarwanto (saintc0d3r@gmail.com) @2012
  * Date: 10/28/12
  * Time: 9:18 AM
  */
-public class Employees extends Controller {
+public class Employees extends RestControllerBase {
+    @BodyParser.Of(BodyParser.Json.class)
     public static Result create(){
-        // TODO: Implement this
-        return ok();
+        return async(MasterDataService.createMasterRecords(request().body().asJson(), EmployeeRepository.class));
     }
 
     public static Result retrieve(){
-        return async(
-            Akka.asPromise(MasterDataService.getAllEmployees().map(
-                    new Mapper<Object, Result>() {
-                        @Override
-                        public Result apply(Object rawResponse) {
-                            GetEmployeesResponse response = (GetEmployeesResponse) rawResponse;
-                            JsonNode jsonResponse = response.getJsonResponse();
-                            return response.getSuccess() ? ok(jsonResponse) : badRequest(jsonResponse);
-                        }
-                    }
-            ))
-        );
+        return async(MasterDataService.getAllMasterRecords(EmployeeRepository.class));
     }
 
-    public static Result update(){
-        // TODO: Implement this
-        return ok();
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result update(Long id){
+        JsonNode json = request().body().asJson();
+        return async(MasterDataService.update(json, id, EmployeeRepository.class));
     }
 
-    public static Result delete(){
-        // TODO: Implement this
-        return ok();
+    public static Result delete(Long id){
+        return async(MasterDataService.deleteMasterRecord(id.longValue(), EmployeeRepository.class));
     }
 }

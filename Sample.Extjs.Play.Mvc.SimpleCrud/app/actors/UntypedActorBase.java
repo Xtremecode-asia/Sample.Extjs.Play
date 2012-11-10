@@ -26,7 +26,7 @@ public abstract class UntypedActorBase extends UntypedActor {
     protected static final String IS_SUCCESS = "IsSuccess";
     protected static final String ERROR = "Error";
     private static ActorRef actorRefSingleInstance;
-    protected static Timeout askTimeOut = new Timeout(1, TimeUnit.MINUTES);
+    protected static Timeout askTimeOut = new Timeout(100, TimeUnit.MINUTES);
 
     public static ActorRef getSingleInstance() {
         return actorRefSingleInstance;
@@ -36,7 +36,7 @@ public abstract class UntypedActorBase extends UntypedActor {
         return config.getString(stringId);
     }
 
-    protected static JsonNode createJsonError(Exception exception) {
+    protected static ObjectNode createJsonError(Exception exception) {
         ObjectNode result = Json.newObject();
         String error = String.format("%s \n Stack trace:%s", exception.getMessage(), Arrays.toString(exception.getStackTrace()));
         result.put(IS_SUCCESS, false);

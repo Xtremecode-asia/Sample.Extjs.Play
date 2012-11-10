@@ -8,6 +8,9 @@ GET     /                           controllers.Application.index()
 # REST Points
 # -- Employees --
 GET     /employees                  controllers.rest.Employees.retrieve()
+POST    /employees                  controllers.rest.Employees.create()
+PUT     /employees/:id              controllers.rest.Employees.update(id: Long)
+DELETE  /employees/:id              controllers.rest.Employees.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
