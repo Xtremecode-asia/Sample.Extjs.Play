@@ -46,8 +46,12 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 		}, '|', {
 			text: 'Auto',
 			enableToggle: true,
-            pressed: true,
+            pressed: false,
             tooltip: 'When enabled, Store will execute Ajax requests as soon as a Record becomes dirty.',
+            action: 'syncToggle',
+            toggleHandler: function(button, press){
+                button.up('grid').store.autoSync = press;
+            },
             scope: this
 		}/*,	{
 			text: 'batch',
@@ -133,6 +137,6 @@ Ext.define('Sample.Extjs.Play.Mvc.SimpleCrud.view.EmployeeGridView',{
 		this.callParent();
 		this.getSelectionModel().allowDeselect = true;
         //this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
-	}
+	},
 
 });
