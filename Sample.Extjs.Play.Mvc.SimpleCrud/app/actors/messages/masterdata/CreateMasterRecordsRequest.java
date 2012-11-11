@@ -1,4 +1,4 @@
-package actors.messages;
+package actors.messages.masterdata;
 
 import org.codehaus.jackson.JsonNode;
 

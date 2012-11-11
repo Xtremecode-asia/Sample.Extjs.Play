@@ -1,4 +1,4 @@
-package actors.messages;
+package actors.messages.masterdata;
 
 /**
  * Created by Wendy Sanarwanto (saintc0d3r@gmail.com) @2012

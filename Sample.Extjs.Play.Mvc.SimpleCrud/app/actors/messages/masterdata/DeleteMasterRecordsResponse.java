@@ -1,5 +1,6 @@
-package actors.messages;
+package actors.messages.masterdata;
 
+import actors.messages.JsonResponseBase;
 import org.codehaus.jackson.JsonNode;
 
 /**
@@ -7,7 +8,7 @@ import org.codehaus.jackson.JsonNode;
  * Date: 11/9/12
  * Time: 6:51 AM
  */
-public class DeleteMasterRecordsResponse extends JsonResponseBase{
+public class DeleteMasterRecordsResponse extends JsonResponseBase {
     public DeleteMasterRecordsResponse(boolean success, JsonNode jsonResponse) {
         super(success, jsonResponse);
     }

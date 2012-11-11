@@ -1,5 +1,6 @@
-package actors.messages;
+package actors.messages.masterdata;
 
+import actors.messages.JsonResponseBase;
 import org.codehaus.jackson.JsonNode;
 
 /**
@@ -8,7 +9,7 @@ import org.codehaus.jackson.JsonNode;
  * Date: 11/10/12
  * Time: 6:27 PM
  */
-public class UpdateMasterRecordsResponse extends JsonResponseBase{
+public class UpdateMasterRecordsResponse extends JsonResponseBase {
     public UpdateMasterRecordsResponse(boolean success, JsonNode jsonResponse) {
         super(success, jsonResponse);
     }

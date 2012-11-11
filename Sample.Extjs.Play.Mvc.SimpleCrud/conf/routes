@@ -5,6 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# Reports Points
+GET /employees/report               controllers.reports.Employee.GetEmployeesReport()
+
 # REST Points
 # -- Employees --
 GET     /employees                  controllers.rest.Employees.retrieve()
@@ -14,3 +17,4 @@ DELETE  /employees/:id              controllers.rest.Employees.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /reports/*file              controllers.Assets.at(path="/reports", file)

@@ -11,11 +11,14 @@ object ApplicationBuild extends Build {
       // Add your project dependencies here,
       "mysql" % "mysql-connector-java" % "5.1.21",
       "com.googlecode.lambdaj" % "lambdaj" % "2.3.3",
-      "net.sf.flexjson" % "flexjson" % "2.1"
+      "net.sf.flexjson" % "flexjson" % "2.1",
+      "net.sf.jasperreports" % "jasperreports" % "4.7.1",
+      "org.codehaus.groovy" % "groovy-all" % "2.0.5"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
-      // Add your own project settings here      
+      // Add your own project settings here
+      playAssetsDirectories <+= baseDirectory / "reports"
     )
 
 }

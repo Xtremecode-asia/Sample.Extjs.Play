@@ -95,7 +95,8 @@ function buildTreePanel(){
             }, {
                 text: 'Reports',
                 expanded: true,
-                id: 'reportsNode'
+                id: 'reportsNode',
+                children: buildReportNodes()
             }]
         },
         listeners: {
@@ -104,6 +105,12 @@ function buildTreePanel(){
             }
         }
     }];
+}
+
+// Build report nodes
+function buildReportNodes(){
+    // TODO -- Add report nodes
+    return [buildChildNodeConfig('Employees Report', 'employeeReportNode', 'employeeReportTab', buildEmployeeReportConfig() )]
 }
 
 // Build children nodes that belong to Master Data node
@@ -136,6 +143,20 @@ function buildEmployeeFormConfig(){
         xtype: 'employeeGridForm',
         flex: 2,
         margins: '0 0 1 0'
+    }];
+}
+
+// Describe the form that belong to the employee report node
+function buildEmployeeReportConfig(){
+    // TODO -- Implement this
+    return [{
+        xtype: 'component',
+        itemId: 'employeeReportView',
+        margins: '0 0 1 0',
+        autoEl: {
+            tag: 'iframe',
+            src: 'http://localhost:9000/employees/report'
+        }
     }];
 }
 

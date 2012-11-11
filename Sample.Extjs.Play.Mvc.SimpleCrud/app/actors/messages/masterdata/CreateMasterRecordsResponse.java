@@ -1,5 +1,6 @@
-package actors.messages;
+package actors.messages.masterdata;
 
+import actors.messages.JsonResponseBase;
 import org.codehaus.jackson.JsonNode;
 
 /**

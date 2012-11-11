@@ -1,6 +1,6 @@
 package actors;
 
-import actors.messages.*;
+import actors.messages.masterdata.*;
 import akka.dispatch.Future;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
