@@ -2,6 +2,9 @@ package actors;
 
 import actors.messages.reporting.GetReportDataRequest;
 import actors.messages.reporting.GetReportDataResponse;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.dispatch.Future;
 import java.io.File;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -19,6 +22,11 @@ import static akka.pattern.Patterns.*;
 public class ReportingService extends UntypedActorBase{
     protected static final String PDF_FORMAT = "application/pdf";
     public static final String ACTOR_NAME = "ReportingService";
+    private static ActorRef s_instance;
+
+    public static void initialiseActorRef(ActorSystem actorSystem){
+        s_instance = actorSystem.actorOf(new Props(ReportingService.class), ACTOR_NAME );
+    }
 
     @Override
     public void onReceive(Object message) {
@@ -29,7 +37,7 @@ public class ReportingService extends UntypedActorBase{
 
     //<editor-fold desc="-- Helpers --">
     public static Future<Object> getReportData(GetReportDataRequest request) {
-        return ask(getSingleInstance(), request, askTimeOut );
+        return ask(s_instance, request, askTimeOut );
     }
 
     private void buildReportData(GetReportDataRequest request){

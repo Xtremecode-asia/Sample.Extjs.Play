@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # Reports Points
-GET /employees/report               controllers.reports.Employee.GetEmployeesReport()
+GET /reports/employees               controllers.reports.Employee.GetEmployeesReport()
 
 # REST Points
 # -- Employees --

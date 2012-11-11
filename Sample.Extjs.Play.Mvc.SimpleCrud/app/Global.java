@@ -28,8 +28,8 @@ public class Global extends GlobalSettings {
     private void initialiseActors() {
         actorsystem = ActorSystem.create(ACTOR_SYSTEM);
         // Create involved actor instances
-        MasterDataService.initialiseSingleton(actorsystem, MasterDataService.class, MasterDataService.ACTOR_NAME);
-        ReportingService.initialiseSingleton(actorsystem, ReportingService.class, ReportingService.ACTOR_NAME);
+        MasterDataService.initialiseActorRef(actorsystem);
+        ReportingService.initialiseActorRef(actorsystem);
     }
 
     @Override

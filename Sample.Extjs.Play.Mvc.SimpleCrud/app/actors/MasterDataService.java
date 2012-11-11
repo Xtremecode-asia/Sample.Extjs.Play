@@ -1,6 +1,9 @@
 package actors;
 
 import actors.messages.masterdata.*;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.dispatch.Future;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
@@ -19,6 +22,11 @@ import static akka.pattern.Patterns.ask;
  */
 public class MasterDataService extends UntypedActorBase{
     public static final String ACTOR_NAME = "MasterDataService";
+    private static ActorRef s_instance;
+
+    public static void initialiseActorRef(ActorSystem actorSystem){
+        s_instance = actorSystem.actorOf(new Props(MasterDataService.class), ACTOR_NAME);
+    }
 
     @Override
     public void onReceive(Object message){
@@ -37,19 +45,19 @@ public class MasterDataService extends UntypedActorBase{
     }
     //<editor-fold desc="-- Service Methods --">
     public static Future<Object> getAllMasterRecords(Class repositoryClass){
-        return ask(getSingleInstance(), new GetAllMasterRecordsRequest(null, repositoryClass), askTimeOut);
+        return ask(s_instance, new GetAllMasterRecordsRequest(null, repositoryClass), askTimeOut);
     }
 
     public static Future<Object> createMasterRecords(JsonNode newRecords, Class repositoryClass){
-        return ask(getSingleInstance(), new CreateMasterRecordsRequest(newRecords, repositoryClass), askTimeOut);
+        return ask(s_instance, new CreateMasterRecordsRequest(newRecords, repositoryClass), askTimeOut);
     }
 
     public static<TId> Future<Object> deleteMasterRecord(TId masterRecordId, Class repositoryClass){
-        return ask(getSingleInstance(), new DeleteMasterRecordsRequest(new Object[]{masterRecordId}, repositoryClass), askTimeOut);
+        return ask(s_instance, new DeleteMasterRecordsRequest(new Object[]{masterRecordId}, repositoryClass), askTimeOut);
     }
 
     public static Future<Object> update(JsonNode changedRecords, Long changedRecordId, Class<EmployeeRepository> repositoryClass) {
-        return ask(getSingleInstance(), new UpdateMasterRecordsRequest(changedRecords, changedRecordId, repositoryClass), askTimeOut);
+        return ask(s_instance, new UpdateMasterRecordsRequest(changedRecords, changedRecordId, repositoryClass), askTimeOut);
     }
 
     //</editor-fold>

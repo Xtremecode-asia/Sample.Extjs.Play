@@ -25,12 +25,12 @@ public abstract class UntypedActorBase extends UntypedActor {
     protected static final String AKKA = "akka";
     protected static final String IS_SUCCESS = "IsSuccess";
     protected static final String ERROR = "Error";
-    private static ActorRef actorRefSingleInstance;
     protected static Timeout askTimeOut = new Timeout(100, TimeUnit.MINUTES);
+//    private static ActorRef actorRefSingleInstance;
 
-    public static ActorRef getSingleInstance() {
-        return actorRefSingleInstance;
-    }
+//    public static ActorRef getSingleInstance() {
+//        return actorRefSingleInstance;
+//    }
 
     protected String getStringById(String stringId){
         return config.getString(stringId);
@@ -47,7 +47,7 @@ public abstract class UntypedActorBase extends UntypedActor {
 
     public abstract void onReceive(Object message);
 
-    public static void initialiseSingleton(ActorSystem actorsystem, Class actorClass, String actorName) {
-        actorRefSingleInstance = actorsystem.actorOf(new Props(actorClass), actorName );
-    }
+//    public static void initialiseSingleton(ActorSystem actorsystem, Class actorClass, String actorName) {
+//        actorRefSingleInstance = actorsystem.actorOf(new Props(actorClass), actorName );
+//    }
 }
